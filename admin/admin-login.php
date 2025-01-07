@@ -17,20 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
         if ($user['admin_password'] === $password) {
             $_SESSION['admin_id'] = $user['id'];
             $_SESSION['admin_email'] = $user['admin_email'];
-            echo '
-                <link rel="stylesheet" href="../css/loading.css" />
-                <div class="loading-page">
-                    <div class="name-container">
-                        <div class="image-logo"><img src="../images/bsitlogo.png" alt=""></div>
-                        <h2>Loading</h2>
-                        <div class="logo-name"><img src="../images/Loading-gif-unscreen.gif" alt="Loading Animation"></div>
-                    </div>
-                </div>
-                <script>
-                    setTimeout(function() {
-                        window.location.href = "admin-dashboard.php";
-                    }, 3000);
-                </script>';
+            header('Location: admin-dashboard.php');
 
             exit();
         } else {

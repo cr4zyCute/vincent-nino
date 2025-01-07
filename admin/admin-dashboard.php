@@ -169,10 +169,12 @@ $unapproved_students_count = $unapproved_students_result->fetch_assoc()['unappro
 
         </section>
 
-
         <section id="student">
             <h2>Manage Students</h2>
             <h3>Student List</h3>
+            <button style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; ">
+                <a href=" #" onclick="showSection('report')" aria-controls="report"><i style="margin: 10px;" class="bi bi-newspaper"></i>student List</a>
+            </button>
 
             <input
                 type="text"
@@ -228,6 +230,78 @@ $unapproved_students_count = $unapproved_students_result->fetch_assoc()['unappro
                     <?php else: ?>
                         <tr>
                             <td colspan="5">No students found.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="report">
+            <h2>Manage Students</h2>
+            <h3>Student List</h3>
+
+            <button style="background-color: #4CAF50; color: white;           padding: 10px 20px;       border: none;             border-radius: 5px;       cursor: pointer;       font-size: 16px;         transition: background-color 0.3s ease; " onclick="window.location.href='download_table.php'">Download Table</button>
+
+            <table class="dashboard-table" id="student-table">
+                <thead>
+                    <tr>
+                        <th>Profile Picture</th>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Status</th>
+                        <th>Section</th>
+                        <th>Year Lvl</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if ($students): ?>
+                        <?php foreach ($students as $student): ?>
+                            <?php
+                            // Fetch Year Level, Section, and Status from the form_responses table
+                            $student_id = $student['id'];
+                            $query = "
+                        SELECT field_id, response 
+                        FROM form_responses 
+                        WHERE student_id = $student_id";
+                            $result = $conn->query($query);
+
+
+                            $status = '';
+                            $section = '';
+                            $year_lvl = '';
+
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    if ($row['field_id'] == 80) {
+                                        $year_lvl = $row['response'];
+                                    } elseif ($row['field_id'] == 81) {
+                                        $section = $row['response'];
+                                    } elseif ($row['field_id'] == 82) {
+                                        $status = $row['response'];
+                                    }
+                                }
+                            }
+                            ?>
+                            <tr>
+                                <td>
+                                    <center>
+                                        <img src="../images-data/<?= !empty($student['image']) ? htmlspecialchars($student['image']) : 'default-profile.jpg'; ?>"
+                                            alt="Profile Picture"
+                                            style="width: 150px; height: 150px; object-fit: cover; border: 1px solid #ccc;">
+                                    </center>
+                                </td>
+                                <td><?= htmlspecialchars($student['id']); ?></td>
+                                <td><?= htmlspecialchars($student['firstname']); ?></td>
+                                <td><?= htmlspecialchars($student['lastname']); ?></td>
+                                <td><?= htmlspecialchars($status); ?></td>
+                                <td><?= htmlspecialchars($section); ?></td>
+                                <td><?= htmlspecialchars($year_lvl); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="7">No students found.</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>

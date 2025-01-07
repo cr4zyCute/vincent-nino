@@ -109,7 +109,7 @@ $forms_query->close();
         </div>
         <div class="icons">
             <!-- Home Icon -->
-            <a href="home.php"><i class="bi bi-house-door-fill"></i></a>
+            <a href="home.php"><i style="color: white;" class="bi bi-house-door-fill"></i></a>
             <div class="dropdown">
                 <a href="studentProfile.php">
                     <img src="images-data/<?= htmlspecialchars($student['image']); ?>" alt="Profile Image" class="profile-image">

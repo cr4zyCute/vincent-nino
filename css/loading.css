@@ -1,11 +1,14 @@
+body {
+  background: linear-gradient(to left, rgb(81, 79, 79), black);
+}
+
 .loading-page {
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
-  background: linear-gradient(135deg, #1e2696, #4f6da0, #c7d2e0);
-
+  background: linear-gradient(to left, rgb(81, 79, 79), black);
   display: flex;
   flex-direction: column;
   justify-content: center;

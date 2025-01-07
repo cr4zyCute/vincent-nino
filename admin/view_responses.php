@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $update_query->execute();
     }
 
-    header("Location: viewresponses.php?id=$student_id");
+    header("Location: view_responses.php?id=$student_id");
     exit;
 }
 ?>

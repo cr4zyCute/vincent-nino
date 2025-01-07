@@ -587,6 +587,38 @@ $forms_query->close();
             font-size: 13px;
         }
     }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 2%;
+        background-color: white;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        border-radius: 5px;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 10px 15px;
+        text-decoration: none;
+        display: block;
+        font-size: 14px;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f1f1f1;
+        color: red;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .profile-pic {
+        border: 2px solid #ffcc00;
+    }
 </style>
 
 <body>
@@ -594,7 +626,13 @@ $forms_query->close();
         <div class="logo" style="width: 45px;"><img src="./images/bsitlogo.png" alt=""></div>BSIT
         <div class="icons">
             <a href="home.php" style="margin-right: 35px;"><i style="color: white;" class="bi bi-shop"></i></a>
-            <img src="images-data/<?= htmlspecialchars($student['image']) ?>" alt="Profile Image" class="profile-pic" />
+            <div class="dropdown">
+                <a href="./studentProfile.php">
+                    <img src="images-data/<?= htmlspecialchars($student['image']) ?>" alt="Profile Image" class="profile-pic" />
+                    <div class="dropdown-content">
+                        <a href="./includes/logout.php"><i style="padding-right: 5px; color: red; font-size: 20px;" class="bi bi-power"></i>Log out</a>
+                    </div>
+            </div>
         </div>
     </div>
     <div class="container">
