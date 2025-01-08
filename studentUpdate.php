@@ -481,7 +481,7 @@ $forms_query->close();
         <div class="grid-container">
             <!-- Profile Card -->
             <div class="card">
-                <form action="studentProfile.php" method="POST" enctype="multipart/form-data">
+                <form action="studentUpdate.php" method="POST" enctype="multipart/form-data">
                     <div class="profile-picture">
                         <?php
                         $imagePath = 'images-data/' . htmlspecialchars($student['image']);
